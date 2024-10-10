@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { TranslationKey, translations } from '@/utils/language';
 import { calculateTax } from '@/utils/taxCalculator';
 
-const TaxCalculatorForm: React.FC = () => {
+
+type FormTranslations = Pick<typeof translations.en, TranslationKey>;
+
+interface TaxCalculatorFormProps {
+  translations: FormTranslations;
+}
+
+const TaxCalculatorForm: React.FC<TaxCalculatorFormProps> = ({ translations }) => {
   const [annualSalary, setAnnualSalary] = useState<number>(0);
   const [monthlySalary, setMonthlySalary] = useState<number>(0);
   const [bonus, setBonus] = useState<number>(0);
@@ -32,7 +40,7 @@ const TaxCalculatorForm: React.FC = () => {
   return (
     <form className="space-y-4">
       <div>
-        <label htmlFor="annualSalary" className="block text-sm font-medium text-gray-700">Annual Salary</label>
+        <label htmlFor="annualSalary" className="block text-sm font-medium text-gray-700">{translations.annualSalary}</label>
         <input
           type="number"
           id="annualSalary"
@@ -42,7 +50,7 @@ const TaxCalculatorForm: React.FC = () => {
         />
       </div>
       <div>
-        <label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">Monthly Salary</label>
+        <label htmlFor="monthlySalary" className="block text-sm font-medium text-gray-700">{translations.monthlySalary}</label>
         <input
           type="number"
           id="monthlySalary"
@@ -52,7 +60,7 @@ const TaxCalculatorForm: React.FC = () => {
         />
       </div>
       <div>
-        <label htmlFor="bonus" className="block text-sm font-medium text-gray-700">Bonus</label>
+        <label htmlFor="bonus" className="block text-sm font-medium text-gray-700">{translations.bonus}</label>
         <input
           type="number"
           id="bonus"
@@ -62,7 +70,7 @@ const TaxCalculatorForm: React.FC = () => {
         />
       </div>
       <div>
-        <label htmlFor="taxAmount" className="block text-sm font-medium text-gray-700">Tax Amount</label>
+        <label htmlFor="taxAmount" className="block text-sm font-medium text-gray-700">{translations.result}</label>
         <input
           type="number"
           id="taxAmount"
